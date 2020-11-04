@@ -3,24 +3,21 @@
 let starTime ,timeleft;
 starTime = Number(new Date().getTime());
 // this is an async function that returns a promise that resolves in 6 seconds
-const startAsyncFunction = async () => new Promise( resolve => setTimeout(() => resolve("Async Done!"),6000));
+const startAsyncFunction = () => setTimeout(() => console.log('Async Done!'),6000);
 
 //  Sync Function
-const startSynchFunction = () => {
-  return new Promise(resolve =>{
-    setTimeout(() => {
-      resolve("sync");
-      console.log("Sync Done!");
-      timeleft = Number((new Date().getTime()));
-      const difference = Number((6) - Math.abs((starTime - timeleft) / 1000));
-      console.log(`Time left of the Asynchronous func after the Synchronous func has ended is: ${difference}`);
-    },4000);
-  })
+const startSyncFunction = async () => {
+  return setTimeout(() => {
+    console.log("Sync Done!");
+    timeleft = Number((new Date().getTime()));
+    const difference = Number((6) - Math.abs((starTime - timeleft) / 1000));
+    console.log(`Time left of the Asynchronous func after the Synchronous func has ended is: ${difference}`);
+  },4000);
 }
 
 const main = async () => {
   startAsyncFunction();
-  await startSynchFunction();
+  await startSyncFunction();
   return console.log({ message: 'done' });
 }
 
